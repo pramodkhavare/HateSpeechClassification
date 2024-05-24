@@ -1,0 +1,17 @@
+training_pipeline_config :
+  pipeline_name : housing 
+  artifact_dir : artifact
+
+data_ingestion_config :
+  data_ingestion_dir : 'data_ingestion'
+  dataset_download_url: https://github.com/pramodkhavare/Datasets/raw/main/HateSpeechClassification.zip
+  zip_download_dir : tgz_data
+  raw_data_dir : raw_data
+  ingested_dir : ingested_data 
+
+data_transformation_config : 
+  transformed_dir : transformed_data_dir 
+  transformed_train_dir : train
+  transformed_test_dir : test
+  preprocessing_dir : preprocessed_obj
+  preprocessing_object_file_name : preprocessed.pkl
