@@ -10,8 +10,28 @@ data_ingestion_config :
   ingested_dir : ingested_data 
 
 data_transformation_config : 
-  transformed_dir : transformed_data_dir 
-  transformed_train_dir : train
-  transformed_test_dir : test
-  preprocessing_dir : preprocessed_obj
-  preprocessing_object_file_name : preprocessed.pkl
+  transformed_dir : transformed_dir 
+  transformed_data_dir : transformed_data 
+  transformed_file_name : clean_data.csv
+   
+
+model_trainer_config: 
+  model_training_dir : model_traaining
+  trained_model : trained_model 
+  model_file_name : model.h5 
+  tokenizer_dir : Tokenizer
+  tokenizer_object_file_name : tokenizer.pkl
+  test_data_folder_path : Test_data
+  test_data_file_name : test_data.csv
+  train_data_folder_path : Train_data 
+  train_data_file_name : train_data.csv
+
+
+model_evaluation_config :
+  model_evaluation_dir : model_evaluation 
+  model_evaluation_file_name : model_evaluation.yaml 
+  
+model_pusher_config:
+  export_dir_name : export_dir 
+  export_model_file_name : model.h5
+  export_tokenizer_file_name : tokenizer.pkl

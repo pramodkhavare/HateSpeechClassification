@@ -18,8 +18,10 @@ class DataIngestion():
     def __init__(self ,data_ingestion_config :DataIngestionConfig):
         try:
             logging.info(f"{'*'*20}Data Ingestion Step Started{'*'*20}")
-            self.config = data_ingestion_config  
-            # print(self.config)
+            
+            self.config = data_ingestion_config
+            print(f"{'*'*20}Data Ingestion Step Started{'*'*20}")
+            print(self.config)  
         except Exception as e:
             raise ClassificationException(e ,sys) from e
         
@@ -57,20 +59,10 @@ class DataIngestion():
 
             logging.info(f"Extracting data into [{self.config.raw_data_dir}]")
 
-            # with tarfile.open(tgz_file_path) as housing_tgz_file_obj:
-            #     housing_tgz_file_obj.extractall(path=self.config.raw_data_dir)
             with zipfile.ZipFile(tgz_file_path, 'r') as zip_ref:
-            # Extract all the contents
                  zip_ref.extractall(self.config.raw_data_dir)
 
             logging.info(f"Extraction is completed") 
-            data_folder_path= self.config.raw_data_dir
-            data_ingestion_artifacts =DataIngestionArtifacts(
-                data_folder_path= data_folder_path ,
-                is_ingested= True ,
-                message=f"Data Ingestion is completed successfully"
-            )
-
         except Exception as e:
             logging.info("Unable to unzip data")
             raise ClassificationException(e ,sys) from e
@@ -78,12 +70,23 @@ class DataIngestion():
     def initiate_data_ingestion(self)->DataIngestionArtifacts:
         try:
             tgz_file_path = self.download_zip_file()
-
-            data_ingestion_artifacts = self.extract_tgz_file(tgz_file_path=tgz_file_path)
-            return data_ingestion_artifacts
+            self.extract_tgz_file(tgz_file_path=tgz_file_path) 
+            data_folder_path = self.config.raw_data_dir
+            data_ingestion_artifacts = DataIngestionArtifacts(
+                data_folder_path= data_folder_path ,
+                is_ingested= True ,
+                message= "Successfully Ingested Data"
+            )
+            print(data_ingestion_artifacts)
+            print(f"{'*'*20} Data Ingesteion Pipeline Completed {'*'*20}")
+            logging.info(f"{'*'*20} Data Ingesteion Pipeline Completed {'*'*20}")
+            return data_ingestion_artifacts 
+        
+        
         except Exception as e:
             raise ClassificationException(e ,sys) from e
     def _del_(self):
+        print(f"{'*'*20} Data Ingesteion Pipeline Completed {'*'*20}")
         logging.info(f"{'*'*20} Data Ingesteion Pipeline Completed {'*'*20}")
 
 

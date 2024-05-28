@@ -21,4 +21,6 @@ numpy
 ensure
 protobuf
 flask
+tensorflow
+keras
 -e .
